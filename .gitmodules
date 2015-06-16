@@ -1,0 +1,18 @@
+[submodule "pvCommon"]
+	path = pvCommon
+	url = git@github.com:epics-base/pvCommonCPP.git
+[submodule "pvData"]
+	path = pvData
+	url = git@github.com:epics-base/pvDataCPP.git
+[submodule "pvAccess"]
+	path = pvAccess
+	url = git@github.com:epics-base/pvAccessCPP.git
+[submodule "normativeTypes"]
+	path = normativeTypes
+	url = git@github.com:epics-base/normativeTypesCPP.git
+[submodule "pvDatabase"]
+	path = pvDatabase
+	url = git@github.com:epics-base/pvDatabaseCPP.git
+[submodule "pvaSrv"]
+	path = pvaSrv
+	url = git@github.com:epics-base/pvaSrv.git
