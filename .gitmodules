@@ -16,3 +16,6 @@
 [submodule "pvaSrv"]
 	path = pvaSrv
 	url = git@github.com:epics-base/pvaSrv.git
+[submodule "pvaClient"]
+	path = pvaClient
+	url = git@github.com:epics-base/pvaClientCPP.git
