@@ -70,17 +70,17 @@ RELEASE.local:
 
 # Module inter-dependencies
 
-build.pvDatabase: build.pvaSrv
+build.pvDatabase: build.pvAccess
 build.pvaSrv: build.pvAccess
-build.pvaClient: build.pvAccess
+build.pvaClient: build.pvAccess build.normativeTypes
 build.pvAccess: build.pvData
 build.normativeTypes: build.pvData
 build.pvData: build.pvCommon
 build.pvCommon: RELEASE.local
 
-host.pvDatabase: host.pvaSrv
+host.pvDatabase: host.pvAccess
 host.pvaSrv: host.pvAccess
-host.pvaClient: host.pvAccess
+host.pvaClient: host.pvAccess host.normativeTypes
 host.pvAccess: host.pvData
 host.normativeTypes: host.pvData
 host.pvData: host.pvCommon
