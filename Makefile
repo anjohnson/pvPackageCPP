@@ -73,16 +73,15 @@ RELEASE.local:
 build.pvDatabase: build.pvAccess
 build.pvaSrv: build.pvAccess
 build.pvaClient: build.pvAccess build.normativeTypes
-build.pvAccess: build.pvData
+build.pvAccess: build.pvData build.pvCommon
 build.normativeTypes: build.pvData
-build.pvData: build.pvCommon
+build.pvData: RELEASE.local
 build.pvCommon: RELEASE.local
 
 host.pvDatabase: host.pvAccess
 host.pvaSrv: host.pvAccess
 host.pvaClient: host.pvAccess host.normativeTypes
-host.pvAccess: host.pvData
+host.pvAccess: host.pvData host.pvCommon
 host.normativeTypes: host.pvData
-host.pvData: host.pvCommon
+host.pvData:  RELEASE.local
 host.pvCommon: RELEASE.local
-
