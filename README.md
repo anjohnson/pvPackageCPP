@@ -4,7 +4,7 @@ Check out the EPICS V4 modules using the following commands:
 
 ```
 git clone --recursive git@github.com:anjohnson/pvPackageCPP.git
-make -C pvPackageCPP EPICS_BASE=/path/to/your/base-3.14
+make -C pvPackageCPP EPICS_BASE=/path/to/your/base-3.x
 ```
 
 The `Makefile` supports various targets:
