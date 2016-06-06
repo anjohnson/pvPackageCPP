@@ -7,6 +7,7 @@ MODULES += pvAccess
 MODULES += pvaClient
 MODULES += pvaSrv
 MODULES += pvDatabase
+MODULES += example
 
 BUILD_TARGETS = $(MODULES:%=build.%)
 HOST_TARGETS = $(MODULES:%=host.%)
@@ -70,6 +71,7 @@ RELEASE.local:
 
 # Module inter-dependencies
 
+build.example: build.pvDatabase build.pvaSrv build.pvaClient
 build.pvDatabase: build.pvAccess
 build.pvaSrv: build.pvAccess
 build.pvaClient: build.pvAccess build.normativeTypes
@@ -78,6 +80,7 @@ build.normativeTypes: build.pvData
 build.pvData: RELEASE.local
 build.pvCommon: RELEASE.local
 
+host.example: host.pvDatabase host.pvaSrv host.pvaClient
 host.pvDatabase: host.pvAccess
 host.pvaSrv: host.pvAccess
 host.pvaClient: host.pvAccess host.normativeTypes
