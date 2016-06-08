@@ -14,18 +14,23 @@ HOST_TARGETS = $(MODULES:%=host.%)
 TEST_TARGETS = $(MODULES:%=test.%)
 PULL_TARGETS = $(MODULES:%=pull.%)
 CLEAN_TARGETS = $(MODULES:%=clean.%)
+CLEAN_DEP = $(filter clean distclean,$(MAKECMDGOALS))
 
 all: $(BUILD_TARGETS)
 host: $(HOST_TARGETS)
 test: $(TEST_TARGETS)
 pull: $(PULL_TARGETS)
 clean distclean: $(CLEAN_TARGETS)
-rebuild: clean all
+rebuild: clean
+	$(MAKE) all
 
-$(BUILD_TARGETS): build.% :
+help:
+	@cat README.md
+
+$(BUILD_TARGETS): build.% : $(CLEAN_DEP)
 	$(MAKE) -C $* all
 
-$(HOST_TARGETS): host.% :
+$(HOST_TARGETS): host.% : $(CLEAN_DEP)
 	$(MAKE) -C $* $(EPICS_HOST_ARCH)
 
 $(TEST_TARGETS): test.% :
@@ -65,7 +70,7 @@ RELEASE.local:
 	echo PVCOMMON = $(PVCOMMON)>>     RELEASE.local
 	echo EPICS_BASE = $(EPICS_BASE)>> RELEASE.local
 
-.PHONY: all host test pull clean distclean rebuild
+.PHONY: all host test pull clean distclean rebuild help
 .PHONY: $(BUILD_TARGETS) $(HOST_TARGETS) $(TEST_TARGETS)
 .PHONY: $(PULL_TARGETS) $(CLEAN_TARGETS)
 
