@@ -1,5 +1,6 @@
 # Build pvPackage submodules
 
+# These are all the submodules
 MODULES += pvCommon
 MODULES += pvData
 MODULES += normativeTypes
@@ -17,6 +18,7 @@ normativeTypes_DEPENDS_ON = pvData
     pvDatabase_DEPENDS_ON = pvAccess
        example_DEPENDS_ON = pvDatabase pvaSrv pvaClient
 
+# Generate lists of internal build targets
 BUILD_TARGETS = $(MODULES:%=build.%)
 HOST_TARGETS = $(MODULES:%=host.%)
 TEST_TARGETS = $(MODULES:%=test.%)
@@ -24,6 +26,7 @@ PULL_TARGETS = $(MODULES:%=pull.%)
 CLEAN_TARGETS = $(MODULES:%=clean.%)
 CLEAN_DEP = $(filter clean distclean,$(MAKECMDGOALS))
 
+# Public build targets
 all: $(BUILD_TARGETS)
 host: $(HOST_TARGETS)
 test: $(TEST_TARGETS)
@@ -34,6 +37,7 @@ rebuild: clean
 help:
 	@cat README.md
 
+# Internal build targets
 $(BUILD_TARGETS): build.% : $(CLEAN_DEP)
 	$(MAKE) -C $* all
 
@@ -49,7 +53,9 @@ $(PULL_TARGETS): pull.% :
 $(CLEAN_TARGETS): clean.% :
 	$(MAKE) -C $* distclean
 
+# Automate the build configuration
 ifeq ($(wildcard RELEASE.local),)
+  # No RELEASE.local file yet, get submodule paths
   PVDATABASE = $(realpath pvDatabase)
   PVASRV = $(realpath pvaSrv)
   PVACLIENT = $(realpath pvaClient)
@@ -57,11 +63,13 @@ ifeq ($(wildcard RELEASE.local),)
   NORMATIVE = $(realpath normativeTypes)
   PVDATA = $(realpath pvData)
   PVCOMMON = $(realpath pvCommon)
-  # User must provide EPICS_BASE to create RELEASE.local
+  # User must provide a value for EPICS_BASE
 else
+  # RELEASE.local exists, import it
   include RELEASE.local
 endif
 
+# Check for EPICS_BASE
 ifeq ($(wildcard $(EPICS_BASE)),)
   $(error EPICS_BASE is not set/present)
 endif
